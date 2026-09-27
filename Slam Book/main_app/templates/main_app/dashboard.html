@@ -1,0 +1,89 @@
+{% extends "main_app/index.html" %}
+{% block content %}
+<div style="max-width: 1000px; margin: 40px auto; font-family: 'Kalam', cursive; background: #fffbe6; padding: 30px; border-radius: 15px; border: 4px solid #ff6b6b;">
+    <h1 style="text-align: center; margin-top: 0;">{{ user.username }}'s Digital Slam Book 📖</h1>
+    
+    <div style="background: #eef; padding: 15px; border: 2px dashed #333; margin: 20px 0; border-radius: 10px;">
+        <p style="margin-top: 0;"><b>Share this link with friends:</b></p>
+        
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <input type="text" id="shareLinkInput" value="{{ share_link }}" readonly style="flex: 1; min-width: 200px; padding: 10px; font-size: 1.1rem; border: 1px solid #ccc; border-radius: 5px; font-family: 'Kalam', cursive;">
+            
+            <button onclick="copyLink()" style="padding: 10px 20px; font-size: 1.1rem; font-family: 'Kalam', cursive; background-color: #4ecdc4; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; box-shadow: 2px 2px 0px #333;">Copy 📋</button>
+            
+            <button onclick="shareLink()" style="padding: 10px 20px; font-size: 1.1rem; font-family: 'Kalam', cursive; background-color: #25D366; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; box-shadow: 2px 2px 0px #333;">Send 💬</button>
+        </div>
+        
+        <p id="copyMsg" style="color: #ff6b6b; font-size: 0.9rem; margin-top: 10px; display: none;">Copied to clipboard!</p>
+    </div>
+
+    <h3 style="font-size: 1.8rem; color: #333; border-bottom: 2px solid #ccc; padding-bottom: 10px;">Messages for you:</h3>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; margin-top: 20px;">
+        
+        {% for slam in slams %}
+        <div style="background: white; padding: 20px; border-top: 6px solid #4ecdc4; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-radius: 8px;">
+            <h2 style="margin-top: 0; color: #ff6b6b; font-size: 1.6rem; border-bottom: 1px dashed #ddd; padding-bottom: 10px;">{{ slam.name }}</h2>
+            
+            <p style="margin: 8px 0; font-size: 1.1rem;"><b>📞 Phone:</b> {{ slam.phone_number }}</p>
+            <p style="margin: 8px 0; font-size: 1.1rem;"><b>⚧️ Gender:</b> {{ slam.gender }}</p>
+            
+            <p style="margin: 8px 0; font-size: 1.1rem;"><b>💝 Feeling on me:</b> {{ slam.feeling }}</p>
+            
+            <div style="background: #fdfdfd; border-left: 3px solid #ff9f43; padding: 10px; margin-top: 15px; border-radius: 0 5px 5px 0;">
+                <p style="margin: 0 0 5px 0; color: #555;"><b>🎸 Describe About Me:</b></p>
+                <p style="margin: 0;">{{ slam.description }}</p>
+            </div>
+
+            <div style="background: #fdfdfd; border-left: 3px solid #ee5253; padding: 10px; margin-top: 10px; border-radius: 0 5px 5px 0;">
+                <p style="margin: 0 0 5px 0; color: #555;"><b>📸 A Good Memory:</b></p>
+                <p style="margin: 0;">{{ slam.memory }}</p>
+            </div>
+
+            <div style="background: #fdfdfd; border-left: 3px solid #10ac84; padding: 10px; margin-top: 10px; border-radius: 0 5px 5px 0;">
+                <p style="margin: 0 0 5px 0; color: #555;"><b>🙂 One Line Answer:</b></p>
+                <p style="margin: 0;"><i>"{{ slam.one_line }}"</i></p>
+            </div>
+        </div>
+        {% empty %}
+        <div style="grid-column: 1 / -1; text-align: center; padding: 40px; background: white; border-radius: 10px; border: 2px dashed #ccc;">
+            <p style="font-size: 1.4rem; color: #666; margin: 0;">No slams yet! Send your link to some friends. ✏️</p>
+        </div>
+        {% endfor %}
+        
+    </div>
+    
+    <br><br>
+    <div style="text-align: center;">
+        <a href="{% url 'logout' %}" style="color: grey; text-decoration: none; border-bottom: 1px solid grey; font-size: 1.2rem;">Logout 👋</a>
+    </div>
+</div>
+
+<script>
+    function copyLink() {
+        var copyText = document.getElementById("shareLinkInput");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999);
+        navigator.clipboard.writeText(copyText.value).then(() => {
+            var msg = document.getElementById("copyMsg");
+            msg.style.display = "block";
+            setTimeout(() => { msg.style.display = "none"; }, 2000);
+        });
+    }
+
+    function shareLink() {
+        var shareUrl = document.getElementById("shareLinkInput").value;
+        var shareText = "Hey! Fill out my Slam Book here: ";
+        if (navigator.share) {
+            navigator.share({
+                title: 'My Slam Book',
+                text: shareText,
+                url: shareUrl
+            }).catch(console.error);
+        } else {
+            var whatsappUrl = "https://api.whatsapp.com/send?text=" + encodeURIComponent(shareText + shareUrl);
+            window.open(whatsappUrl, '_blank');
+        }
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}SLAM BOOK{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="{% static 'main_app/style.css' %}">
+    <link rel="stylesheet" href="{% static 'main_app/slambook.css' %}">
+</head>
+<body style="background-color: #eaddd0; min-height: 100vh; display: flex; flex-direction: column;">
+    
+    <nav style="text-align: center; padding: 20px 20px 5px 20px; font-family: 'Kalam', cursive; font-size: 1.5rem;">
+        <a href="{% url 'login' %}" style="color: #333; text-decoration: none; font-weight: bold; margin-right: 20px;">🙈🙉🙊 Login</a>
+        <a href="{% url 'register' %}" style="color: #333; text-decoration: none; font-weight: bold;">🐽 Register</a>
+    </nav>
+
+    <div style="text-align: center; font-family: 'Kalam', cursive; font-size: 1.3rem; color: #555; margin-bottom: 20px; padding: 0 15px;">
+        <em>"Side by side or miles apart, friends are close to the heart."</em>
+    </div>
+
+    <main style="flex: 1;">
+        {% block content %}
+        {% endblock %}
+    </main>
+    
+</body>
+</html>

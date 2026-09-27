@@ -1,0 +1,237 @@
+/* =========================================
+   BASE CONTAINER & NOTEBOOK SHAPE
+   ========================================= */
+.book-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 20px 40px;
+    font-family: 'Kalam', cursive;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.slam-book {
+    display: flex;
+    width: 1000px;
+    max-width: 100%;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: #fffdf5; /* Cream paper */
+}
+
+/* =========================================
+   PAGES & BINDING
+   ========================================= */
+.page {
+    flex: 1;
+    padding: 40px;
+    position: relative;
+    /* Create the notebook lines */
+    background-image: repeating-linear-gradient(transparent, transparent 38px, #add8e6 38px, #add8e6 40px);
+    background-position: 0 40px;
+    overflow: hidden; /* Keeps washi tape from spilling out of rounded corners */
+}
+
+/* Center Binding Effect */
+.left-page {
+    border-right: 2px solid #ccc;
+    box-shadow: inset -10px 0 15px rgba(0,0,0,0.05);
+    /* Pink margin line */
+    border-left: 3px solid #ffb6c1;
+    margin-left: 20px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.right-page {
+    box-shadow: inset 10px 0 15px rgba(0,0,0,0.05);
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+/* =========================================
+   TYPOGRAPHY & INPUTS
+   ========================================= */
+.slam-title {
+    text-align: center;
+    color: #ff6b6b;
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 0px #fff, 3px 3px 0px #ccc;
+    line-height: 1.2;
+}
+
+label {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    font-weight: bold;
+}
+
+input[type="text"], 
+input[type="tel"], 
+input[type="password"], 
+input[type="date"], 
+textarea {
+    font-family: 'Kalam', cursive;
+    font-size: 1.2rem;
+    background: white;
+    border: 2px solid #333;
+    border-radius: 4px;
+    padding: 5px 10px;
+    box-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: #ff6b6b;
+}
+
+/* =========================================
+   LAYOUT CLASSES
+   ========================================= */
+.field-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+    gap: 15px;
+}
+
+.field-row input {
+    flex: 1;
+    max-width: 250px;
+}
+
+.field-column {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+}
+
+.field-column textarea {
+    margin-top: 10px;
+    background: transparent;
+    border: none;
+    line-height: 40px; /* Matches the notebook lines perfectly */
+    resize: none;
+    padding: 0;
+    box-shadow: none;
+}
+
+/* =========================================
+   SPECIAL FRAMES (POLAROID & ONE-LINE)
+   ========================================= */
+.bottom-frames {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.polaroid-box {
+    background: white;
+    padding: 15px;
+    border: 2px solid #333;
+    transform: rotate(-3deg);
+    box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+    width: 250px;
+}
+
+.polaroid-box textarea {
+    width: 100%;
+    border: none;
+    background: transparent;
+    line-height: 30px;
+    resize: none;
+    box-shadow: none;
+    padding: 0;
+}
+
+.one-line-box {
+    background: white;
+    padding: 10px 15px;
+    border: 2px solid #333;
+    transform: rotate(2deg);
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    position: relative;
+}
+
+.one-line-box input {
+    border: none;
+    border-bottom: 2px solid #333;
+    box-shadow: none;
+    border-radius: 0;
+    padding-left: 0;
+}
+
+/* =========================================
+   DECORATIONS (TAPE & STICKERS)
+   ========================================= */
+.washi-tape {
+    position: absolute;
+    width: 120px;
+    height: 35px;
+    opacity: 0.85;
+    z-index: 10;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+
+.tape-top-left {
+    top: -5px;
+    left: -25px;
+    transform: rotate(-45deg);
+    background: repeating-linear-gradient(45deg, #a8e6cf, #a8e6cf 10px, #dcedc1 10px, #dcedc1 20px);
+}
+
+.tape-top-right {
+    top: -5px;
+    right: -25px;
+    transform: rotate(45deg);
+    background: repeating-linear-gradient(-45deg, #ffb7b2, #ffb7b2 10px, #ffdac1 10px, #ffdac1 20px);
+}
+
+.sticker {
+    position: absolute;
+    font-size: 2rem;
+    user-select: none;
+    z-index: 5;
+}
+
+/* Sticker positioning utility classes */
+.s1 { top: 30%; left: 5%; transform: rotate(-15deg); }
+.s2 { top: 50%; left: 10%; transform: rotate(10deg); }
+.s3 { top: 70%; left: 25%; font-size: 1.5rem; }
+.s4 { top: 25%; right: 5%; transform: rotate(15deg); }
+.s5 { position: absolute; bottom: -15px; right: -15px; font-size: 2.5rem; transform: rotate(-10deg); }
+
+/* =========================================
+   BUTTONS
+   ========================================= */
+.submit-area {
+    margin-top: 40px;
+    text-align: right;
+}
+
+.submit-btn {
+    background: #4ecdc4;
+    color: white;
+    border: 2px solid #333;
+    padding: 10px 20px;
+    font-size: 1.5rem;
+    font-family: 'Kalam', cursive;
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 3px 3px 0px #333;
+    transition: all 0.1s;
+}
+
+.submit-btn:hover {
+    background: #45b7af;
+}
+
+.submit-btn:active {
+    transform: translate(3px, 3px);
+    box-shadow: none;
+}

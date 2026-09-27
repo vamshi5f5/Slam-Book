@@ -1,0 +1,67 @@
+{% extends "main_app/index.html" %}
+
+{% block title %}Register - Slam Book{% endblock %}
+
+{% block content %}
+<div class="book-wrapper">
+    <form method="POST" action="{% url 'register' %}" class="slam-book">
+        {% csrf_token %}
+        
+        <div class="page left-page">
+            <div class="washi-tape tape-top-left"></div>
+            <h1 class="slam-title">NEW FRIEND!</h1>
+            
+            <div class="field-row">
+                <label>Username:</label>
+                <input type="text" name="username" required>
+            </div>
+            
+            <div class="field-row">
+                <label>Password:</label>
+                <input type="password" name="password" required>
+            </div>
+            
+            <div class="field-row">
+                <label>Confirm:</label>
+                <input type="password" name="confirm_password" required>
+            </div>
+
+            <div class="decorations">
+                <span class="sticker s1">🌟</span>
+                <span class="sticker s4" style="top: 80%;">🎉</span>
+            </div>
+        </div>
+
+        <div class="page right-page">
+            <div class="washi-tape tape-top-right"></div>
+            
+            <div class="field-row" style="margin-top: 20px;">
+                <label>DOB: 🎂</label>
+                <input type="date" name="dob">
+            </div>
+            
+            <div class="field-row">
+                <label>Phone: 📱</label>
+                <input type="tel" name="phone">
+            </div>
+            
+            <div class="field-column" style="margin-bottom: 15px;">
+                <label>Gender:</label>
+                <div style="font-size: 1.2rem; margin-top: 10px;">
+                    <input type="radio" name="gender" value="Male"> Male &nbsp;&nbsp;
+                    <input type="radio" name="gender" value="Female"> Female &nbsp;&nbsp;
+                    <input type="radio" name="gender" value="Others"> Others
+                </div>
+            </div>
+            
+            <div class="submit-area">
+                <button type="submit" class="submit-btn">Join the Book</button>
+            </div>
+            
+            <div style="margin-top: 30px; text-align: right; font-size: 1.2rem;">
+                <a href="{% url 'login' %}" style="color: #4ecdc4; text-decoration: none; border-bottom: 2px dashed #4ecdc4;">Already in the book? Login! 📖</a>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

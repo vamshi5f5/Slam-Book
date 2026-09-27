@@ -1,0 +1,84 @@
+{% extends "main_app/index.html" %}
+{% load static %}
+
+{% block title %}Slam Book Entry{% endblock %}
+
+{% block content %}
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'main_app/slambook.css' %}">
+
+<div class="book-wrapper">
+    <form method="POST" action="{% url 'submit_slam' owner.username %}" class="slam-book">
+        {% csrf_token %}
+        
+        <div class="page left-page">
+            <div class="washi-tape tape-top-left"></div>
+            
+            <h1 class="slam-title">ALL ABOUT ME</h1>
+            
+            <div class="field-row">
+                <label>Name:</label>
+                <input type="text" name="name" required>
+            </div>
+            
+            <div class="field-row">
+                <label>Phone Number:</label>
+                <input type="tel" name="phone_number">
+            </div>
+            
+            <div class="field-row">
+                <label>Gender:</label>
+                <div class="radio-group">
+                    <input type="text" name="gender" placeholder="Male / Female / Other">
+                </div>
+            </div>
+
+            <div class="field-row">
+                <label>Feeling on you:</label>
+                <div class="radio-group" style="display: flex; gap: 15px; flex-wrap: wrap; align-items: center; font-size: 1.1rem;">
+                    <label style="cursor: pointer;"><input type="radio" name="feeling" value="Love" required> Love ❤️</label>
+                    <label style="cursor: pointer;"><input type="radio" name="feeling" value="Crush"> Crush 😍</label>
+                    <label style="cursor: pointer;"><input type="radio" name="feeling" value="Friend"> Friend 🤝</label>
+                    <label style="cursor: pointer;"><input type="radio" name="feeling" value="Sister"> Sister 👧</label>
+                    <label style="cursor: pointer;"><input type="radio" name="feeling" value="Brother"> Brother 👦</label>
+                </div>
+            </div>
+
+            <div class="decorations">
+                <span class="sticker s1">🧁</span>
+                <span class="sticker s2">⭐</span>
+                <span class="sticker s3">💖</span>
+                <span class="sticker s4">📷</span>
+            </div>
+        </div>
+
+        <div class="page right-page">
+            <div class="washi-tape tape-top-right"></div>
+            
+            <h1 class="slam-title">ALL ABOUT ME</h1>
+            
+            <div class="field-column">
+                <label>DESCRIBE ABOUT ME: 🎸</label>
+                <textarea name="description" rows="6"></textarea>
+            </div>
+            
+            <div class="bottom-frames">
+                <div class="polaroid-box">
+                    <label>A GOOD MEMORY WITH ME:</label>
+                    <textarea name="memory" rows="3"></textarea>
+                </div>
+                
+                <div class="one-line-box">
+                    <label>ONE LINE ANSWER ABOUT ME:</label>
+                    <input type="text" name="one_line">
+                    <span class="sticker s5">🙂</span>
+                </div>
+            </div>
+
+            <div class="submit-area">
+                <button type="submit" class="submit-btn">Save Slam Book</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

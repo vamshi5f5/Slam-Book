@@ -1,0 +1,44 @@
+{% extends "main_app/index.html" %}
+
+{% block title %}Login - Slam Book{% endblock %}
+
+{% block content %}
+<div class="book-wrapper">
+    <form method="POST" action="{% url 'login' %}" class="slam-book">
+        {% csrf_token %}
+        
+        <div class="page left-page">
+            <div class="washi-tape tape-top-left"></div>
+            <h1 class="slam-title" style="margin-top: 50px;">WELCOME<br>BACK!</h1>
+            
+            <div class="decorations">
+                <span class="sticker s1">🗝️</span>
+                <span class="sticker s2">✨</span>
+                <span class="sticker s3">📖</span>
+            </div>
+        </div>
+
+        <div class="page right-page">
+            <div class="washi-tape tape-top-right"></div>
+            
+            <div class="field-column" style="margin-top: 40px;">
+                <label>Username: 👤</label>
+                <input type="text" name="username" required>
+            </div>
+            
+            <div class="field-column">
+                <label>Password: 🔒</label>
+                <input type="password" name="password" required>
+            </div>
+            
+            <div class="submit-area">
+                <button type="submit" class="submit-btn">Unlock Book</button>
+            </div>
+            
+            <div style="margin-top: 30px; text-align: right; font-size: 1.2rem;">
+                <a href="{% url 'register' %}" style="color: #ff6b6b; text-decoration: none; border-bottom: 2px dashed #ff6b6b;">New friend? Register here! ✏️</a>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
